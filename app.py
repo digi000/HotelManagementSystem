@@ -53,4 +53,18 @@ class Foods:
         self.price = int(price)
         self.quantity = int(quantity)
 
+class Rooms:
+    typeRoom = ""
+    priceRoom = 0
+    totalRooms = 0
+    bookRooms = 0
+    startingRoom = 0
+
+    def __init__(self, typeR, priceR, totalR, book, sRoom):
+        self.typeRoom = typeR
+        self.priceRoom = priceR
+        self.totalRooms = totalR
+        self.bookRooms = book+sRoom
+        self.startingRoom = sRoom
+
 @app.route("/")
