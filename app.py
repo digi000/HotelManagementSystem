@@ -32,5 +32,15 @@ class OrderedFoods:
         self.namefood = name
         self.quantity = quantity
         self.price = price
-        
+
+class workers:
+    name = ""
+    job = ""
+    salary = ""
+
+    def __init__(self, name, job, salary):
+        self.name = name
+        self.job = job
+        self.salary = salary
+
 @app.route("/")
