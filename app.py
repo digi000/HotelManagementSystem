@@ -23,4 +23,14 @@ class Id:
         orderfood = OrderedFoods(name, int(quantity), int(price))
         self.myOrderedFoods.append(orderfood)
 
+class OrderedFoods:
+    namefood = ""
+    quantity = 0
+    price = 0
+
+    def __init__(self, name, quantity, price):
+        self.namefood = name
+        self.quantity = quantity
+        self.price = price
+        
 @app.route("/")
