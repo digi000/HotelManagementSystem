@@ -98,6 +98,46 @@ def saveData():
         print(record, file=myfile, sep="\n")
     myfile.close()
 
+# Load Data of All Residents
+
+
+def loaddata():
+    file_path = path+'/data/data.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        name = ""
+        email = ""
+        password = ""
+        roomno = ""
+        roomtype = ""
+        expen = ""
+        i = 0
+        while(record[i] != ","):
+            name = name + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            email = email + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            password = password + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            roomno = roomno + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            roomtype = roomtype + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            expen = expen + record[x]
+        person = Id(name, email, password, int(roomno), roomtype, int(expen))
+        id_list.append(person)
+
 # Save Data of Manager
 
 
@@ -112,6 +152,36 @@ def saveDataManager():
     myfile = open(file_path, 'a')
     print(record, file=myfile, sep="\n")
     myfile.close()
+
+# Load Data of Manager
+
+
+def loaddataManager():
+    global managerName
+    global managerEmail
+    global managerPin
+    file_path = path+'/data/dataManager.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    name = ""
+    email = ""
+    password = ""
+    i = 0
+    for record in records:
+        while(record[i] != ","):
+            name = name + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            email = email + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            password = password + record[x]
+    managerName = name
+    managerEmail = email
+    managerPin = password
+
 
 # Save Data of Owner
 
@@ -128,6 +198,35 @@ def saveDataOwner():
     print(record, file=myfile, sep="\n")
     myfile.close()
 
+# Load Data of Owner
+
+
+def loaddataOwner():
+    global ownerName
+    global ownerEmail
+    global ownerPin
+    file_path = path+'/data/dataOwner.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    name = ""
+    email = ""
+    password = ""
+    i = 0
+    for record in records:
+        while(record[i] != ","):
+            name = name + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            email = email + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            password = password + record[x]
+    ownerName = name
+    ownerEmail = email
+    ownerPin = password
+
 # Save Messages
 
 
@@ -141,6 +240,14 @@ def saveSms():
         myfile = open(file_path, 'a')
         print(record, file=myfile, sep="\n")
     myfile.close()
+
+def loadSms():
+    file_path = path+'/data/messages.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        if record != "":
+            sms_List.append(record)
 
 # Save Complains
 
@@ -156,6 +263,14 @@ def saveComplains():
         print(record, file=myfile, sep="\n")
     myfile.close()
 
+def loadComplains():
+    file_path = path+'/data/complains.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        if record != "":
+            complains.append(record)
+
 # Save Worker Data
 
 
@@ -169,6 +284,29 @@ def saveWorkerData():
         myfile = open(file_path, 'a')
         print(record, file=myfile, sep="\n")
     myfile.close()
+
+def loadWokerData():
+    global worker_List
+    file_path = path+'/data/workers.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        name = ""
+        job = ""
+        salary = ""
+        i = 0
+        while(record[i] != ","):
+            name = name + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            job = job + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            salary = salary + record[x]
+        worker = workers(name, job, salary)
+        worker_List.append(worker)
 
 # Save Data of All Foods
 
@@ -184,6 +322,31 @@ def saveDataFood():
         print(record, file=myfile, sep="\n")
     myfile.close()
 
+# Load Data of All Foods
+
+
+def loadfoodData():
+    file_path = path+'/data/foods.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        name = ""
+        price = ""
+        quantity = ""
+        i = 0
+        while(record[i] != ","):
+            name = name + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            price = price + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            quantity = quantity + record[x]
+        food = Foods(name, price, quantity)
+        food_List.append(food)
+
 # Save Data of All Rooms
 
 
@@ -198,6 +361,42 @@ def saveDataRooms():
         myfile = open(file_path, 'a')
         print(record, file=myfile, sep="\n")
     myfile.close()
+
+# Load Data of All Rooms
+
+
+def loaddataRooms():
+    file_path = path+'/data/rooms.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        typeR = ""
+        priceR = ""
+        totalR = ""
+        bookR = ""
+        startingR = ""
+        i = 0
+        while(record[i] != ","):
+            typeR = typeR + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            priceR = priceR + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            totalR = totalR + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            bookR = bookR + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            startingR = startingR + record[x]
+        room = Rooms(typeR, int(priceR), int(
+            totalR), int(bookR), int(startingR))
+        room_List.append(room)
 
 # Save Data of All Ordered Foods
 
@@ -217,5 +416,43 @@ def saveOrerdedFoods():
             myfile = open(file_path, 'a')
             print(record, file=myfile, sep="\n")
     myfile.close()
+
+# Load Data of All Ordered Foods
+
+
+def loadOrderedFoods():
+    global id_list
+    file_path = path+'/data/orderedProducts.txt'
+    myfile = open(file_path, 'r')
+    records = myfile.read().splitlines()
+    for record in records:
+        namef = ""
+        quantityf = ""
+        pricef = ""
+        name = ""
+        pin = ""
+        i = 0
+        while(record[i] != ","):
+            namef = namef + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            quantityf = quantityf + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            pricef = pricef + record[i]
+            i = i+1
+        i = i+1
+        while(record[i] != ","):
+            name = name + record[i]
+            i = i+1
+        i = i+1
+        for x in range(i, len(record)):
+            pin = pin + record[x]
+        for myid in id_list:
+            if(myid.name == name and myid.pin == pin):
+                myid.addOrderedFood(namef, quantityf, pricef)
+
 
 @app.route("/")
