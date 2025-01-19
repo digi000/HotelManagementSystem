@@ -462,8 +462,12 @@ def loadOrderedFoods():
 @app.route("/ownerhome")
 
 @app.route("/loginmanager")
+def login2():
+    return render_template("Manager/loginManager.html")
 
 @app.route("/managerhome")
+def manager():
+    return render_template("Manager/manager.html", variable=managerEmail,totalresidents=len(id_list),totalworkers=len(worker_List),totalfoods=len(food_List),types=len(room_List))
 
 @app.route("/login")
 def residentLogin():
