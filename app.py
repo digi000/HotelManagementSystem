@@ -469,6 +469,18 @@ def login1():
 def owner():
     return render_template("Owner/owner.html", variable=ownerEmail, residents=len(id_list), workers=len(worker_List), totalincome=totalexpenditures(), totalsalary=totalsalaries())
 
+@app.route("/sendMessage")
+def sendMessageManager():
+    global ownerEmail
+    return render_template("Owner/sendMessageToManager.html", variable=ownerEmail)
+
+
+@app.route("/recieveMessage")
+def recieveMessageManager():
+    global sms_List
+    return render_template("Owner/recieveMessageOwner.html", variable=ownerEmail, smsList=sms_List)
+
+
 @app.route("/profileowner")
 def profile1():
     return render_template("Owner/profileOwner.html", email=ownerEmail, name=ownerName, pin=ownerPin)
@@ -484,6 +496,15 @@ def login2():
 @app.route("/managerhome")
 def manager():
     return render_template("Manager/manager.html", variable=managerEmail,totalresidents=len(id_list),totalworkers=len(worker_List),totalfoods=len(food_List),types=len(room_List))
+
+@app.route("/sendMessageManager")
+def sendMessageOwner():
+    return render_template("Manager/sendMessageToOwner.html", variable=managerEmail)
+
+@app.route("/recieveMessageManager")
+def recieveMessageMYManager():
+    return render_template("Manager/recieveMessageManager.html", variable=managerEmail, smsList=sms_List)
+
 
 @app.route("/login")
 def residentLogin():
