@@ -67,4 +67,23 @@ class Rooms:
         self.bookRooms = book+sRoom
         self.startingRoom = sRoom
 
+id_list = []
+worker_List = []
+sms_List = []
+complains = []
+food_List = []
+room_List = []
+MyEmail = ""
+MyPin = ""
+MyName = ""
+MyObject = ""
+managerEmail = ""
+managerName = ""
+managerPin = ""
+ownerEmail = ""
+ownerName = ""
+ownerPin = ""
+
+# Save Data of All Residents
+
 @app.route("/")
