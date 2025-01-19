@@ -464,3 +464,13 @@ def loadOrderedFoods():
 @app.route("/loginmanager")
 
 @app.route("/managerhome")
+
+@app.route("/login")
+def residentLogin():
+    return render_template("Resident/loginResident.html")
+
+@app.route("/resident")
+def resident():
+    global MyObject
+    yourcomplains = calculatecomplains()
+    return render_template("Resident/resident.html", variable=MyEmail, roomtype=MyObject.roomType, roomno=MyObject.roomNo, expen=MyObject.expenditures, yourcomplains=yourcomplains)
