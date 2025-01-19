@@ -43,4 +43,14 @@ class workers:
         self.job = job
         self.salary = salary
 
+class Foods:
+    name = ""
+    price = 0
+    quantity = 0
+
+    def __init__(self, name, price, quantity):
+        self.name = name
+        self.price = int(price)
+        self.quantity = int(quantity)
+
 @app.route("/")
