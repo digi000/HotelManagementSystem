@@ -460,3 +460,7 @@ def loadOrderedFoods():
 @app.route("/loginowner")
 
 @app.route("/ownerhome")
+
+@app.route("/loginmanager")
+
+@app.route("/managerhome")
