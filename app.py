@@ -566,6 +566,19 @@ def delete2():
         saveWorkerData()
     return render_template("Manager/workersDetail.html", variable=managerEmail, MyList=worker_List)
 
+@app.route("/Rooms")
+def MyRoom():
+    return render_template("Manager/roomsDetail.html", variable=managerEmail, myList=room_List)
+
+@app.route("/deleteRoom",methods=['POST','GET'])
+def delete3():
+    if request.method=="POST":
+        index=request.form['myindex']
+        index=int(index)-1
+        room_List.pop(index)
+        saveDataRooms()
+    return render_template("Manager/roomsDetail.html", variable=managerEmail, myList=room_List)
+
 @app.route("/foods")
 def MyFoods():
     return render_template("Manager/foodDetail.html", variable=managerEmail, MyList=food_List)
@@ -578,3 +591,19 @@ def delete4():
         food_List.pop(index)
         saveDataFood()
     return render_template("Manager/foodDetail.html", variable=managerEmail, MyList=food_List)
+
+@app.route("/changinRoom")
+def ChangeRoom():
+    return render_template("Manager/Rooms.html", variable=managerEmail)
+
+@app.route("/addanewmyRoom", methods=['POST', 'GET'])
+def NewRoom():
+    if request.method == "POST":
+        typeR = request.form['typeR']
+        priceR = request.form['priceR']
+        totalR = request.form['totalR']
+        startingR = request.form['startingR']
+        room = Rooms(typeR, int(priceR), int(totalR), 0, int(startingR))
+        room_List.append(room)
+        saveDataRooms()
+    return render_template("Manager/roomsDetail.html", variable=managerEmail, myList=room_List)
