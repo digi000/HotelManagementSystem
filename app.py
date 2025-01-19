@@ -456,3 +456,7 @@ def loadOrderedFoods():
 
 
 @app.route("/")
+
+@app.route("/loginowner")
+
+@app.route("/ownerhome")
