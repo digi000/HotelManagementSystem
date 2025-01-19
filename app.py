@@ -456,6 +456,10 @@ def loadOrderedFoods():
 
 
 @app.route("/")
+def Page():
+    return render_template("mainLoginPage.html")
+
+# Owner Pages
 
 @app.route("/loginowner")
 def login1():
