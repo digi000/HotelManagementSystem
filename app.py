@@ -521,6 +521,10 @@ def createAcoount():
     saveData()
     return render_template("Manager/manager.html", variable=managerEmail,totalresidents=len(id_list),totalworkers=len(worker_List),totalfoods=len(food_List),types=len(room_List))
 
+@app.route("/addFood")
+def Food():
+    return render_template("Manager/foodAdd.html")
+
 @app.route("/addWorker")
 def Woker():
     return render_template("Manager/WorkerAdd.html")
@@ -561,3 +565,16 @@ def delete2():
         worker_List.pop(index)
         saveWorkerData()
     return render_template("Manager/workersDetail.html", variable=managerEmail, MyList=worker_List)
+
+@app.route("/foods")
+def MyFoods():
+    return render_template("Manager/foodDetail.html", variable=managerEmail, MyList=food_List)
+
+@app.route("/deleteFood",methods=['POST','GET'])
+def delete4():
+    if request.method=="POST":
+        index=request.form['myindex']
+        index=int(index)-1
+        food_List.pop(index)
+        saveDataFood()
+    return render_template("Manager/foodDetail.html", variable=managerEmail, MyList=food_List)
