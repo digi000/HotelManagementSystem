@@ -506,6 +506,22 @@ def recieveMessageMYManager():
     return render_template("Manager/recieveMessageManager.html", variable=managerEmail, smsList=sms_List)
 
 
+@app.route("/createAccountresident")
+def Account():
+    return render_template("Manager/registerResident.html")
+
+
+@app.route("/registerResident", methods=['POST', 'GET'])
+def createAcoount():
+    name = request.form['name1']+" "+request.form['name2']
+    email = request.form['email']
+    pin = request.form['password']
+    person = Id(name, email, pin, 0, "None", 0)
+    id_list.append(person)
+    saveData()
+    return render_template("Manager/manager.html", variable=managerEmail,totalresidents=len(id_list),totalworkers=len(worker_List),totalfoods=len(food_List),types=len(room_List))
+
+
 @app.route("/login")
 def residentLogin():
     return render_template("Resident/loginResident.html")
@@ -519,3 +535,12 @@ def resident():
     global MyObject
     yourcomplains = calculatecomplains()
     return render_template("Resident/resident.html", variable=MyEmail, roomtype=MyObject.roomType, roomno=MyObject.roomNo, expen=MyObject.expenditures, yourcomplains=yourcomplains)
+
+@app.route("/deleteResident",methods=['POST','GET'])
+def delete1():
+    if request.method=="POST":
+        index=request.form['myindex']
+        index=int(index)-1
+        id_list.pop(index)
+        saveData()
+    return render_template("Manager/residentDetail.html", variable=managerEmail, My_List=id_list)
