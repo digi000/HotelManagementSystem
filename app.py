@@ -592,6 +592,12 @@ def delete4():
         saveDataFood()
     return render_template("Manager/foodDetail.html", variable=managerEmail, MyList=food_List)
 
+@app.route("/complains")
+def Mycomplains():
+    global complains
+    return render_template("Manager/recievedComplains.html", variable=managerEmail, listcomplains=complains)
+
+
 @app.route("/changinRoom")
 def ChangeRoom():
     return render_template("Manager/Rooms.html", variable=managerEmail)
@@ -607,3 +613,17 @@ def NewRoom():
         room_List.append(room)
         saveDataRooms()
     return render_template("Manager/roomsDetail.html", variable=managerEmail, myList=room_List)
+
+@app.route("/sendComplains")
+def complainssend():
+    return render_template("Resident/sendComplains.html", variable=MyEmail)
+
+
+@app.route("/sendComplain", methods=['POST', 'GET'])
+def compalinsend():
+    global MyName
+    if request.method == "POST":
+        complain = request.form['sms']+","+MyName
+        complains.append(complain)
+        saveComplains()
+    return render_template("Resident/sendComplains.html", variable=MyEmail)
