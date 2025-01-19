@@ -469,6 +469,14 @@ def login1():
 def owner():
     return render_template("Owner/owner.html", variable=ownerEmail, residents=len(id_list), workers=len(worker_List), totalincome=totalexpenditures(), totalsalary=totalsalaries())
 
+@app.route("/profileowner")
+def profile1():
+    return render_template("Owner/profileOwner.html", email=ownerEmail, name=ownerName, pin=ownerPin)
+
+@app.route("/profilemanager")
+def profile2():
+    return render_template("Manager/profileManager.html", email=managerEmail, name=managerName, pin=managerPin)
+
 @app.route("/loginmanager")
 def login2():
     return render_template("Manager/loginManager.html")
@@ -480,6 +488,10 @@ def manager():
 @app.route("/login")
 def residentLogin():
     return render_template("Resident/loginResident.html")
+
+@app.route("/profileresident")
+def profile3():
+    return render_template("Resident/profileResident.html", email=MyEmail, name=MyName, pin=MyPin)
 
 @app.route("/resident")
 def resident():
