@@ -1,5 +1,6 @@
-from flask import Flask
-app = Flask(__name__)
+from flask import Flask, render_template, request
+app = Flask(__name__, template_folder="templtes")
+path = os.path.dirname(os.path.abspath(__file__))
 
 class Id:
     name = ""
