@@ -465,6 +465,19 @@ def Page():
 def login1():
     return render_template("Owner/loginOwner.html")
 
+def totalexpenditures():
+    total = 0
+    for myid in id_list:
+        total = total+float(myid.expenditures)
+    return total
+
+
+def totalsalaries():
+    total = 0
+    for worker in worker_List:
+        total = total+float(worker.salary)
+    return total
+
 @app.route("/ownerhome")
 def owner():
     return render_template("Owner/owner.html", variable=ownerEmail, residents=len(id_list), workers=len(worker_List), totalincome=totalexpenditures(), totalsalary=totalsalaries())
@@ -591,6 +604,20 @@ def resident():
     global MyObject
     yourcomplains = calculatecomplains()
     return render_template("Resident/resident.html", variable=MyEmail, roomtype=MyObject.roomType, roomno=MyObject.roomNo, expen=MyObject.expenditures, yourcomplains=yourcomplains)
+
+
+def calculatecomplains():
+    global MyName
+    yourcomplains = 0
+    for complain in complains:
+        i = 0
+        i = complain.find(",")
+        i = i+1
+        name = complain[i:len(complain)]
+        if name == MyName:
+            yourcomplains = yourcomplains+1
+    return yourcomplains
+
 
 @app.route("/getRoom")
 def allotmet():
