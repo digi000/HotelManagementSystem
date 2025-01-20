@@ -480,6 +480,13 @@ def recieveMessageManager():
     global sms_List
     return render_template("Owner/recieveMessageOwner.html", variable=ownerEmail, smsList=sms_List)
 
+def verifyowner(email, password):
+    global ownerEmail
+    global ownerPin
+    if email == ownerEmail and password == ownerPin:
+        return True
+    return False
+
 
 @app.route("/profileowner")
 def profile1():
@@ -506,6 +513,17 @@ def changeMyOwnerPassword():
         return render_template("Owner/loginOwner.html")
     else:
         return render_template("Owner/forgotpinowner.html")
+
+def verifyemail(email, password):
+    global ownerEmail
+    global ownerPin
+    if email == ownerEmail:
+        ownerPin = password
+        return True
+    return False
+
+# Manager Pages
+
 
 @app.route("/profilemanager")
 def profile2():
@@ -643,6 +661,23 @@ def Mycomplains():
     return render_template("Manager/recievedComplains.html", variable=managerEmail, listcomplains=complains)
 
 
+def verifymanager(email, password):
+    global managerEmail
+    global managerPin
+    if email == managerEmail and password == managerPin:
+        return True
+    return False
+
+
+def verifyemailmanager(email, password):
+    global managerEmail
+    global managerPin
+    if email == managerEmail:
+        managerPin = password
+        return True
+    return False
+
+
 @app.route("/changinRoom")
 def ChangeRoom():
     return render_template("Manager/Rooms.html", variable=managerEmail)
@@ -673,6 +708,26 @@ def compalinsend():
         saveComplains()
     return render_template("Resident/sendComplains.html", variable=MyEmail)
 
+def verify(email, password):
+    global MyName
+    global MyObject
+    for id in id_list:
+        if email == id.email and password == id.pin:
+            MyName = id.name
+            MyObject = id
+            return True
+    return False
+
+
+def verifyemailResident(email, password):
+    global id_list
+    for id in id_list:
+        if email == id.email:
+            id.pin = password
+            return True
+    return False
+
+
 @app.route("/getnewRoom", methods=['POST', 'GET'])
 def Myroom():
     global MyObject
@@ -687,6 +742,24 @@ def Myroom():
     else:
         return render_template("Resident/allotmentofRoom.html", variable=MyEmail, roomlist=room_List)
 
+
+def verifyroom(email, password, roomtype):
+    global id_list
+    global room_List
+    for myid in id_list:
+        if(myid.email == email and myid.pin == password and myid.roomType == "None"):
+            for room in room_List:
+                if(room.typeRoom == roomtype):
+                    myid.expenditures = myid.expenditures+(room.priceRoom)
+                    room.bookRooms = room.bookRooms+1
+                    if(room.totalRooms == room.bookRooms):
+                        room.bookRooms = room.startingRoom
+                    myid.roomNo = room.bookRooms
+                    myid.roomType = room.typeRoom
+                    return True
+    return False
+
+
 @app.route("/orderfoodnow", methods=['POST', 'GET'])
 def ordermyfood():
     email = request.form['email']
@@ -699,3 +772,25 @@ def ordermyfood():
         return render_template("Resident/orderedfoods.html", variable=MyEmail, foodList=MyObject.myOrderedFoods)
     else:
         return render_template("Resident/orderFood.html", variable=MyEmail, foodList=food_List)
+
+
+def verifyemailforFood(email, password, foodname, quantity):
+    global id_list
+    global food_List
+    price = 0
+    for food in food_List:
+        if(food.name == foodname and (int(food.quantity)-int(quantity)) >= 0):
+            price = food.price
+            food.quantity = food.quantity-int(quantity)
+            saveDataFood()
+            for myid in id_list:
+                if(myid.email == email and myid.pin == password):
+                    myid.addOrderedFood(foodname, quantity, price)
+                    myid.expenditures = myid.expenditures + \
+                        (int(quantity)*int(price))
+                    saveData()
+                    return True
+    return False
+
+# Other People
+
