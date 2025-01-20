@@ -485,6 +485,28 @@ def recieveMessageManager():
 def profile1():
     return render_template("Owner/profileOwner.html", email=ownerEmail, name=ownerName, pin=ownerPin)
 
+
+@app.route("/forgotpinowner")
+def Pin():
+    return render_template("Owner/forgotpinowner.html")
+
+
+@app.route("/changepasswordowner")
+def loadchangepagepassword():
+    global ownerEmail
+    return render_template("Owner/changeownerpin.html", variable=ownerEmail)
+
+
+@app.route("/frogotPinOwner", methods=['POST', 'GET'])
+def changeMyOwnerPassword():
+    email = request.form['myemail']
+    password = request.form['pin']
+    if verifyemail(email, password):
+        saveDataOwner()
+        return render_template("Owner/loginOwner.html")
+    else:
+        return render_template("Owner/forgotpinowner.html")
+
 @app.route("/profilemanager")
 def profile2():
     return render_template("Manager/profileManager.html", email=managerEmail, name=managerName, pin=managerPin)
@@ -529,6 +551,14 @@ def Food():
 def Woker():
     return render_template("Manager/WorkerAdd.html")
 
+@app.route("/changepasswordmanager")
+def loadchangepagepasswordmanager():
+    global managerEmail
+    return render_template("Manager/changemanagerpin.html", variable=managerEmail)
+
+@app.route("/forgotmanagerpin")
+def managerforgotpin():
+    return render_template("Manager/forgotpinmanager.html")
 
 @app.route("/login")
 def residentLogin():
