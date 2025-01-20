@@ -579,6 +579,16 @@ def allotmet():
     return render_template("Resident/allotmentofRoom.html", variable=MyEmail, roomlist=room_List)
 
 
+@app.route("/orderfood")
+def FastFood():
+    return render_template("Resident/orderFood.html", variable=MyEmail, foodList=food_List)
+
+@app.route("/orderfooddetail")
+def FastFoodDetail():
+    global MyObject
+    return render_template("Resident/orderedfoods.html", variable=MyEmail, foodList=MyObject.myOrderedFoods)
+
+
 @app.route("/deleteResident",methods=['POST','GET'])
 def delete1():
     if request.method=="POST":
@@ -676,3 +686,16 @@ def Myroom():
         return render_template("Resident/resident.html", variable=MyEmail, roomtype=MyObject.roomType, roomno=MyObject.roomNo, expen=MyObject.expenditures, yourcomplains=yourcomplains)
     else:
         return render_template("Resident/allotmentofRoom.html", variable=MyEmail, roomlist=room_List)
+
+@app.route("/orderfoodnow", methods=['POST', 'GET'])
+def ordermyfood():
+    email = request.form['email']
+    password = request.form['pin']
+    food = request.form['food']
+    quantity = request.form['quantity']
+    if verifyemailforFood(email, password, food, quantity):
+        global MyObject
+        saveOrerdedFoods()
+        return render_template("Resident/orderedfoods.html", variable=MyEmail, foodList=MyObject.myOrderedFoods)
+    else:
+        return render_template("Resident/orderFood.html", variable=MyEmail, foodList=food_List)
