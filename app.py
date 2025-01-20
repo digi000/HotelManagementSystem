@@ -574,6 +574,11 @@ def resident():
     yourcomplains = calculatecomplains()
     return render_template("Resident/resident.html", variable=MyEmail, roomtype=MyObject.roomType, roomno=MyObject.roomNo, expen=MyObject.expenditures, yourcomplains=yourcomplains)
 
+@app.route("/getRoom")
+def allotmet():
+    return render_template("Resident/allotmentofRoom.html", variable=MyEmail, roomlist=room_List)
+
+
 @app.route("/deleteResident",methods=['POST','GET'])
 def delete1():
     if request.method=="POST":
@@ -657,3 +662,17 @@ def compalinsend():
         complains.append(complain)
         saveComplains()
     return render_template("Resident/sendComplains.html", variable=MyEmail)
+
+@app.route("/getnewRoom", methods=['POST', 'GET'])
+def Myroom():
+    global MyObject
+    email = request.form['myemail']
+    password = request.form['pin']
+    roomtype = request.form['room']
+    if verifyroom(email, password, roomtype):
+        saveData()
+        saveDataRooms()
+        yourcomplains = calculatecomplains()
+        return render_template("Resident/resident.html", variable=MyEmail, roomtype=MyObject.roomType, roomno=MyObject.roomNo, expen=MyObject.expenditures, yourcomplains=yourcomplains)
+    else:
+        return render_template("Resident/allotmentofRoom.html", variable=MyEmail, roomlist=room_List)
