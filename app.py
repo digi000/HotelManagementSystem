@@ -483,6 +483,11 @@ def totalsalaries():
 def owner():
     return render_template("Owner/owner.html", variable=ownerEmail, residents=len(id_list), workers=len(worker_List), totalincome=totalexpenditures(), totalsalary=totalsalaries())
 
+@app.route("/createAccountManager")
+def AccountManager():
+    return render_template("Owner/registerManager.html")
+
+
 @app.route("/sendMessage")
 def sendMessageManager():
     global ownerEmail
