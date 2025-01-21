@@ -863,3 +863,28 @@ def verifyemailforFood(email, password, foodname, quantity):
 
 # Other People
 
+@app.route("/peoplehome")
+def people():
+    return render_template("people.html")
+
+
+@app.route("/applyresidence")
+def peopleApply1():
+    return render_template("ResidenceApply.html")
+
+
+@app.route("/applyjob")
+def peopleApply2():
+    return render_template("ApplyJob.html")
+
+if __name__ == "__main__":
+    loaddata()
+    loadOrderedFoods()
+    loaddataManager()
+    loaddataOwner()
+    loadSms()
+    loadComplains()
+    loadWokerData()
+    loadfoodData()
+    loaddataRooms()
+    app.run(debug=True,host="0.0.0.0")
