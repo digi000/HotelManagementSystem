@@ -601,6 +601,16 @@ def createAcoount():
 def Food():
     return render_template("Manager/foodAdd.html")
 
+@app.route("/registerResident", methods=['POST', 'GET'])
+def createAcoount():
+    name = request.form['name1']+" "+request.form['name2']
+    email = request.form['email']
+    pin = request.form['password']
+    person = Id(name, email, pin, 0, "None", 0)
+    id_list.append(person)
+    saveData()
+    return render_template("Manager/manager.html", variable=managerEmail,totalresidents=len(id_list),totalworkers=len(worker_List),totalfoods=len(food_List),types=len(room_List))
+
 @app.route("/addWorker")
 def Woker():
     return render_template("Manager/WorkerAdd.html")
@@ -621,6 +631,15 @@ def residentLogin():
 @app.route("/profileresident")
 def profile3():
     return render_template("Resident/profileResident.html", email=MyEmail, name=MyName, pin=MyPin)
+
+@app.route("/deleteResident",methods=['POST','GET'])
+def delete1():
+    if request.method=="POST":
+        index=request.form['myindex']
+        index=int(index)-1
+        id_list.pop(index)
+        saveData()
+    return render_template("Manager/residentDetail.html", variable=managerEmail, My_List=id_list)
 
 @app.route("/resident")
 def resident():
