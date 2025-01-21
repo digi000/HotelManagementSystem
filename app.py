@@ -511,6 +511,23 @@ def verifyowner(email, password):
 def profile1():
     return render_template("Owner/profileOwner.html", email=ownerEmail, name=ownerName, pin=ownerPin)
 
+@app.route("/registerMyOwner")
+def register():
+    return render_template("Owner/registerOwner.html")
+
+@app.route("/myregisterOwner", methods=['POST', 'GET'])
+def createAcoount23():
+    global ownerEmail
+    global ownerName
+    global ownerPin
+    name = request.form['name1']+" "+request.form['name2']
+    email = request.form['email']
+    pin = request.form['password']
+    ownerName=name
+    ownerEmail=email
+    ownerPin=pin
+    saveDataOwner()
+    return render_template("Owner/loginOwner.html")
 
 @app.route("/forgotpinowner")
 def Pin():
